@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddNotesActivity">
+
+    <TextView
+        android:id="@+id/addNotesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Notes"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:textColor="#298CDA"
+        android:textSize="25sp"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:hintTextColor="#298CDA">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_yourDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Add your Notes"
+            tools:ignore="HardcodedText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveYourData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Data"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:background="#298CDA"
+        android:textAllCaps="false"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

@@ -1,10 +1,10 @@
 package com.example.todoapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
@@ -16,9 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var addNotesButton : FloatingActionButton
     private lateinit var todoRecyclerView : RecyclerView
-    private lateinit var userAdapter: UserAdapter
-
-    private val userList = ArrayList<UserModel>()
+    private lateinit var userAdapter: UserNotesAdapter
+    private lateinit var userNotesDataBaseHelper: TodoDataBaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +26,9 @@ class MainActivity : AppCompatActivity() {
         addNotesButton = findViewById(R.id.addNotes_Button)
         todoRecyclerView = findViewById(R.id.todo_recyclerView)
 
-        userList.add(UserModel("Aditya"))
+        userNotesDataBaseHelper = TodoDataBaseHelper(this)
 
-        userAdapter =UserAdapter(this, userList)
+        userAdapter = UserNotesAdapter(this, userNotesDataBaseHelper.insertedAllNotes())
         todoRecyclerView.layoutManager =LinearLayoutManager(this)
         todoRecyclerView.adapter = userAdapter
 
@@ -38,26 +37,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("InflateParams", "NotifyDataSetChanged")
+    @SuppressLint("InflateParams", "NotifyDataSetChanged", "MissingInflatedId")
     private fun addDataFromAlertDialog(){
-        val alertDialog = AlertDialog.Builder(this)
-        val layout = LayoutInflater.from(this).inflate(R.layout.user_add_data, null, false)
-        val userNotes : AppCompatEditText = findViewById(R.id.add_yourNotes)
-        val saveData : AppCompatButton = findViewById(R.id.saveYourData)
+        startActivity(Intent(this, AddNotesActivity::class.java))
+    }
 
-        val dialog = alertDialog.create()
-        dialog.setView(layout)
-        dialog.show()
-
-        saveData.setOnClickListener {
-            userList.add(
-                UserModel(
-                userNotes.text.toString()
-            )
-            )
-            userAdapter.notifyDataSetChanged()
-            dialog.dismiss()
-            Toast.makeText(this, "hii alertDialog", Toast.LENGTH_SHORT).show()
-        }
+    override fun onResume() {
+        super.onResume()
+        userAdapter.refresh(userNotesDataBaseHelper.insertedAllNotes())
     }
 }
