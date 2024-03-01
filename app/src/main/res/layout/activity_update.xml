@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
     tools:context=".UpdateActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/descTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Notes"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            app:hintTextColor="#298CDA">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/update_yourDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Update your Notes"
+                tools:ignore="HardcodedText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/updateYourData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Data"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:background="#298CDA"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -56,4 +56,36 @@ class TodoDataBaseHelper(context: Context) :
         cursor.close()
         return notesList
     }
+
+    fun updateNotes(userNoteList: UserNotesModel){
+        val dataBase = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_DESC, userNoteList.userDesc)
+        }
+        val clause = "$COLUMN_ID =?"
+        val arguments = arrayOf(userNoteList.userId.toString())
+        dataBase.update(TABLE_NAME, values, clause, arguments)
+    }
+
+    @SuppressLint("Range")
+    fun getNoteById(notesId: Int):UserNotesModel{
+        val dataBase = writableDatabase
+        val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = $notesId"
+        val cursor = dataBase.rawQuery(query, null)
+        cursor.moveToFirst()
+
+        val id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID))
+        val descUpdate = cursor.getString(cursor.getColumnIndex(COLUMN_DESC))
+
+        cursor.close()
+        return UserNotesModel(id, descUpdate)
+    }
+
+    fun deleteNotes(notesId: Int){
+        val deleteDataBase = writableDatabase
+        val clause = "$COLUMN_ID = ?"
+        val arguments = arrayOf(notesId.toString())
+        deleteDataBase.delete(TABLE_NAME, clause, arguments)
+
+    }
 }
